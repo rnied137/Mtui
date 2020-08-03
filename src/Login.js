@@ -17,24 +17,30 @@ export default class Login extends Component {
             user: '',
             password: ''
         }
-
+this.handleSubmit = this.handleSubmit.bind(this);
     }
 
      handleSubmit(event){
-        event.prevendDefault();
-        console.log("User: ", this.state.user,
-                    "Passowrd: ", this.state.password);
+        event.preventDefault();
+        console.log("User: " + this.state.user +
+                    "Passowrd: +", this.state.password);
     }
 
     showReaction(event) {
-        event.prevendDefault();
-        console.log("User: Passowrd: ");
+        event.preventDefault();
+        console.log("User:" + this.state.user + " Passowrd: " + this.state.password);
+    } 
+
+    handleChange = (event)=> {
+        this.setState({
+            [event.target.id]: event.target.value
+        })
     }
 
     render() {
         return (
             <div  style={{border: '5px solid black'}} >
-                 <form onSubmit={this.showReaction}>
+                 <form onSubmit={this.handleSubmit}>
  <Grid container
                 alignContent="center"
                 alignItems="center"
@@ -46,8 +52,9 @@ export default class Login extends Component {
 
                 <Grid item xs={12}>
                     <TextField
-                        id="input-with-user-icon"
+                        id="user"
                         label="User"
+                        onChange={this.handleChange}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
@@ -59,8 +66,9 @@ export default class Login extends Component {
 
                 <Grid item xs={12}>
                     <TextField
-                        id="input-with-password-icon"
+                        id="password"
                         label="Password"
+                        onChange={this.handleChange}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">
